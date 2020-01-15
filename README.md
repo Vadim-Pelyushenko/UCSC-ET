@@ -22,6 +22,9 @@ Also it might be interesting just to look at the data.
   server serving it, or we need to use a framework which can make a headless browser
   thing? so that we can have that javascript simulated and be able to access the
   resulting DOM.
+  - **This video has been helpful:** https://www.youtube.com/watch?v=lqqYBLJR1Yc
+    - It turns out this is not too bad. We have figured out a request which we can
+    manipulate to get the relevant information.
   - For starter's we can try to just straight up get the relevant data once. Then
   we need to make a program which can periodically scrape this data.
 - Need to decide which information is relevant to scrape
