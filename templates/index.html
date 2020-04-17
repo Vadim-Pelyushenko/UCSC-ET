@@ -11,57 +11,127 @@
 
     <body>
 
-        <!-- First class -->
+        <!-- First Section -->
         <section class="section">
+            <form action="formHandler.py" id="selectreturn"> <!-- STILL WORKING ON THIS -->
 
-            <form action="formHandler.py" id="selectreturn">
-            <!--<form>-->
                 <div class="field">
                     <label class="label">Choose a subject</label>
                     <div class="control">
                         <div class="select">
                             <select form="selectreturn">
-                                <option value="default" id="default"></option>
-                                <option value="option1" id="option1">option1</option>
-                                <option value="option2" id="option2">option2</option>
+                                <option value="default" id="subjectDefault"></option>
+                                <option value="option1" id="subjectOption1">option1</option>
+                                <option value="option2" id="subjectOption2">option2</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <input type="submit" value="Submit">
             </form>
-
         </section>
+
+        <!-- Temp section with some debugging elements -->
+        <Section>
+            <button onclick="sortTable(0)">Sort by name</button>
+            <button onclick="sortTable(1)">Sort by Enrollment Count</button>
+        </Section>
 
 
 
         <!-- Second section -->
         <section class="section">
 
-            <div class="box">
-                <p>Ping1</p>
-            </div>
+            <table id="resultTable" class="table is-striped is-fullwidth is-hoverable is-bordered sortable">
 
-            <div class="box">
-                <p>Ping2</p>
-            </div>
+                <!-- Head of the table -->
+                <thead>
+                    <tr>
+                        <th onclick="sortTable(0)">Class</th>
+                        <th onclick="sortTable(1)">Current Enrollment Count</th>
+                        <th>Visualization</th>
+                    </tr>
+                </thead>
 
-            <div class="box">
-                <p>Ping3</p>
-            </div>
+                <!-- Foot of the table -->
+                <!--<tfoot>-->
+                    <!--<tr>-->
+                        <!--<th>Class</th>-->
+                        <!--<th>Current Enrollment Count</th>-->
+                        <!--<th>Visualization</th>-->
+                    <!--</tr>-->
+                <!--</tfoot>-->
 
-            <!--<div class="field">-->
+                <!-- Main content of table -->
+                <!-- This is where our result will be listed -->
+                <tbody>
 
-                <!--<label class="label"> Name </label>-->
+                    <!-- Table row -->
+                    <tr>
+                        <td>A_Class Name 1</td>
+                        <td>B_Count 1</td>
+                        <td>C_Visualization 1</td>
+                    </tr>
 
-                <!--<div class="control is-three-fifths">-->
+                    <tr>
+                        <td>C_Class Name 2</td>
+                        <td>A_Count 2</td>
+                        <td>B_Visualization 2</td>
+                    </tr>
 
-                    <!--<input class="input" type="text" placeholder="Type name here.">-->
+                    <tr>
+                        <td>B_Class Name 3</td>
+                        <td>C_Count 3</td>
+                        <td>A_Visualization 3</td>
+                    </tr>
 
-                <!--</div>-->
+                    <!--<tr>-->
+                        <!--<th>Class Name 3</th>-->
+                        <!--<td>Count 3</td>-->
+                        <!--<td>Visualization 3</td>-->
+                    <!--</tr>-->
 
-            <!--</div>-->
-
+                </tbody>
+            </table>
         </section>
+
+
+        <script>
+        function sortTable(row) {
+          var table, rows, switching, i, x, y, shouldSwitch;
+          table = document.getElementById("resultTable");
+          switching = true;
+          /*Make a loop that will continue until
+          no switching has been done:*/
+          while (switching) {
+            //start by saying: no switching is done:
+            switching = false;
+            rows = table.rows;
+            /*Loop through all table rows (except the
+            first, which contains table headers):*/
+            for (i = 1; i < (rows.length - 1); i++) {
+              //start by saying there should be no switching:
+              shouldSwitch = false;
+              /*Get the two elements you want to compare,
+              one from current row and one from the next:*/
+              x = rows[i].getElementsByTagName("TD")[row];
+              y = rows[i + 1].getElementsByTagName("TD")[row];
+              //check if the two rows should switch place:
+              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                //if so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+              }
+            }
+            if (shouldSwitch) {
+              /*If a switch has been marked, make the switch
+              and mark that a switch has been done:*/
+              rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+              switching = true;
+            }
+          }
+        }
+        </script>
+
     </body>
 </html>
