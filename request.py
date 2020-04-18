@@ -35,25 +35,28 @@ info = {
         }
 
 # https://requests.readthedocs.io/en/master/api/#requests.Response
-# The type of object that is returned
 response = requests.post(URL, data=info)
 
 # Looks ugly. Use beautifulSoup to make it look better
-# This should not be the returned html page
+# This should now be the returned html page
 soupResponse = BeautifulSoup(response.text, 'html.parser')
 # print(soupResponse.prettify())
 
 
 
+#This returns the div of the first class [HARDCODED]
+# print(soupResponse.find(id='rowpanel_0').prettify())
 
-# print(soupResponse.find(id='rowpanel_0').prettify())  #This returns the div of the first class [HARDCODED]
-# print(soupResponse.find(id='class_id_62232').text)  #This returns the name of the first class [HARDCODED]
+#This returns the name of the first class [HARDCODED]
+# print(soupResponse.find(id='class_id_62232').text)
 
 
 # Returns the panel body (the div that all the classes are contained in)
 allClassesdiv = soupResponse.find('div', attrs={"class": "panel-body"})
 
-# These are the steps taken to return the name of the first class
+
+
+# These are the steps taken to return the name of the first class [DEBUG]
 # -----------------
 # Hardcoded pulling the very first class' box
 temp = allClassesdiv.find(id='rowpanel_0')
@@ -66,6 +69,8 @@ temp3 = temp2.find('a')
 # print(temp3.text)
 # ----------------
 
+
+
 # The links contain the class names and class numbers
 allLinks = allClassesdiv.find_all('a')
 
@@ -76,4 +81,4 @@ classNumbersResults = [elem.text for elem in allLinks if elem.text.isdigit()]
 
 
 for x in range(len(classNamesResults)):
-    print(classNamesResults[x] + '\n' +classNumbersResults[x] + '\n')
+    print(classNamesResults[x]+'\n'+classNumbersResults[x]+'\n')
